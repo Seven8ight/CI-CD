@@ -10,11 +10,16 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      # Optional: build your static site if needed
+      # Optional: build step, not needed for your static site
       # - run: npm install && npm run build
 
-      - uses: JamesIves/github-pages-deploy-action@v4
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
         with:
           token: ${{ secrets.PERSONAL_TOKEN }}
           branch: gh-pages
-          folder: . # Or "build", "dist", etc., depending on your project
+          folder: .
+
+      - name: Cleanup temp folder (optional)
+        run: git worktree remove github-pages-deploy-action-temp-deployment-folder --force
+        continue-on-error: true
