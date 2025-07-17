@@ -15,6 +15,6 @@ jobs:
 
       - uses: JamesIves/github-pages-deploy-action@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.PERSONAL_TOKEN }}
           branch: gh-pages
           folder: . # Or "build", "dist", etc., depending on your project
