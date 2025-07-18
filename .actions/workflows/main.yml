@@ -1,0 +1,27 @@
+name: CI/CD Pipeline # this is the name of the ci/cd pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-deploy:
+    name: Build and deploy html application
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup node modules
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+        run: npm i
+
+      - name: Build Application
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+        run: browserify script.js -o main.js
