@@ -18,10 +18,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 24
+
+      - name: Install dependencies
         run: npm i
 
       - name: Build Application
         uses: actions/setup-node@v4
         with:
           node-version: 24
+
+      - name: Build files to support common modules
         run: browserify script.js -o main.js
