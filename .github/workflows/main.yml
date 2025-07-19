@@ -14,18 +14,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup node modules
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 24
 
-      - name: Install dependencies
-        run: npm i -g
-
-      - name: Build Application
-        uses: actions/setup-node@v4
-        with:
-          node-version: 24
+      - name: Install dependencies (including browserify)
+        run: |
+          npm install
+          npm install -g browserify
 
       - name: Build files to support common modules
         run: browserify script.js -o main.js
