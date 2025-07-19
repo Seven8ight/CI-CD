@@ -26,3 +26,17 @@ jobs:
 
       - name: Bundle script with Browserify
         run: npx browserify script.js -o main.js
+
+      - name: Build Docker Image
+        uses: actions/build-push-action@v2
+        with:
+          context: .
+          dockerfile: Dockerfile
+          push: false
+          tags: ${{secrets.DOCKER_HUB_USERNAME}}/ci-cd:latest$(date-'%Y-%m-%d%H-%M-%S')
+
+      - name: Login to Docker hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{secrets.DOCKER_HUB_USERNAME}}
+          password: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
